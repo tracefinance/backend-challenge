@@ -21,7 +21,7 @@ Antes do pagamento ser autorizado é necessário validar se a carteira que está
 Criar uma API que realize as seguintes operações:
 
 #### Criar carteira
-```json
+```
 POST /wallets
 {
   "ownerName": String
@@ -29,12 +29,12 @@ POST /wallets
 ```
 
 #### Ver limite disponível
-```json
+```
 GET /wallets/{walletId}/limits
 ```
 
 #### Realizar pagamento
-```json
+```
 POST /wallets/{walletId}/payments
 
 {
@@ -49,11 +49,11 @@ POST /wallets/{walletId}/payments
 - O periodo diurno corresponde ao horário entre as 06:00 até as 18:00, ou seja:
 ```kotlin
 date >= 06:00 && date < 18:00 = diurno
-- ```
+```
 - O periodo noturno corresponde ao horário entre as 18:00 até as 06:00, ou seja:
 ```kotlin
 date >= 18:00 && date < 06:00 = noturno
-- ```
+```
 - Todos os exemplos de endpoints são opcionais, você possui total liberdade para realizar as operações necessárias da forma que quiser, contanto que as regras sejam respeitadas
 
 ##Pré-Requisitos
