@@ -56,7 +56,7 @@ date >= 18:00 && date < 06:00 = noturno
 ```
 - Todos os exemplos de endpoints são opcionais, você possui total liberdade para realizar as operações necessárias da forma que quiser, contanto que as regras sejam respeitadas
 
-##Pré-Requisitos
+## Pré-Requisitos
 
 Além da API, o desafio só será aceito para avaliação se contiver os seguintes requisitos:
 - Documentação dos endpoints (uma collection no postman seria ótimo)
@@ -77,5 +77,5 @@ Além dos requisitos levantados acima, iremos olhar para os seguintes critérios
 
 - Utilização de docker
 
-## ⚔️ Submissão
+## Submissão
 Para submeter o desafio, envie para o e-mail da trace a URL do repositório no github e de permissão de leitura para o usuário @tracefinancedev
