@@ -78,4 +78,4 @@ Além dos requisitos levantados acima, iremos olhar para os seguintes critérios
 - Utilização de docker
 
 ## Submissão
-Para submeter o desafio, envie para o e-mail da trace a URL do repositório no github e de permissão de leitura para o usuário @tracefinancedev
+Para submeter o desafio, envie para o e-mail da trace (dev.accounts@trace.finance) a URL do repositório no github e de permissão de leitura para o usuário @tracefinancedev
