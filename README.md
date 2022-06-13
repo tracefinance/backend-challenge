@@ -1,4 +1,4 @@
-# 🚀 Back end challenge - PaymentAPI
+# 🚀 Back-end challenge - PaymentAPI
 
 Desafio para avaliar o candidato que queira ingressar na Trace Finance como desenvolvedor back-end
 
@@ -102,7 +102,7 @@ Além da API, o desafio só será aceito para avaliação se contiver os seguint
 ## Observações
 
 - O teste foi desenvolvido para ser feito independente da senioridade, portanto não é necessário implementar tudo que foi pedido na sessão [Seria legal](#seria-legal)
-- Foque em fazer muito bem a demanda, ou seja, os requisitos da sessão [Pré-Requisitos](#pr-requisitos)
+- Foque em fazer muito bem a demanda, ou seja, os requisitos da sessão [Pré-Requisitos](#pré-requisitos)
 
 ## Submissão
 1. Dar permissão de leitura para o usuário do github @tracefinancedev no repositório do desafio.
