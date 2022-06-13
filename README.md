@@ -20,7 +20,9 @@ Antes do pagamento ser autorizado é necessário validar se a carteira que está
 
 Criar uma API que realize as seguintes operações:
 
-#### Criar carteira
+### Criar carteira
+
+#### Request
 ```
 POST /wallets
 {
@@ -28,22 +30,48 @@ POST /wallets
 }
 ```
 
-#### Ver limite disponível
+#### Response
+```
+Http status code: 201
+{
+  "id": UUID
+  "ownerName": String
+}
+```
+
+### Ver limite disponível
+
+#### Request
 ```
 GET /wallets/{walletId}/limits
 ```
 
-#### Realizar pagamento
+#### Response
+```
+Http status code: 200
+{
+  "value": Number
+}
+```
+
+### Realizar pagamento
+
+#### Request
 ```
 POST /wallets/{walletId}/payments
 
 {
-  "amount": Decimal,
-  "Date": Date
+  "amount": Number,
+  "Date": String
 }
 ```
 
-## Observações
+#### Response
+```
+Http status code: 200
+```
+
+## Pontos importantes
 - O limite é diário e não único
 - O limite diurno não interfere no limite noturno, ou seja, uma carteira pode pagar até 5000 reais em um dia de semana (4000 durante o dia, 1000 durante a noite)
 - O periodo diurno corresponde ao horário entre as 06:00 até as 18:00, ou seja:
@@ -54,28 +82,28 @@ date >= 06:00 && date < 18:00 = diurno
 ```kotlin
 date >= 18:00 && date < 06:00 = noturno
 ```
-- Todos os exemplos de endpoints são opcionais, você possui total liberdade para realizar as operações necessárias da forma que quiser, contanto que as regras sejam respeitadas
 
 ## Pré-Requisitos
 
 Além da API, o desafio só será aceito para avaliação se contiver os seguintes requisitos:
-- Documentação dos endpoints (uma collection no postman seria ótimo)
+- Repositório do desafio privado no Github
 - Testes
 - Instruções para subir a aplicação e suas dependencias para testes manuais
 
-## Critérios de Avaliação
+### Seria legal
 
-Além dos requisitos levantados acima, iremos olhar para os seguintes critérios durante a correção do desafio:
-
+- Utilização de docker
 - Arquitetura (DDD, Clean Architecture)
 - Documentação (comente sobre decisões técnicas, escolhas, requisitos, etc)
 - Código limpo (utilização de princípios como DRY, KISS, SOLID, YAGNI)
 - Testes (unitários, e2e, etc)
 - Padrão de commits (Conventional)
 
-### Seria legal
+## Observações
 
-- Utilização de docker
+- O teste foi desenvolvido para ser feito independente da senioridade, portanto não é necessário implementar tudo que foi pedido na sessão [Seria legal](#seria-legal)
+- Foque em fazer muito bem a demanda, ou seja, os requisitos da sessão [Pré-Requisitos](#pr-requisitos)
 
 ## Submissão
-Para submeter o desafio, envie para o e-mail da trace (dev.accounts@trace.finance) a URL do repositório no github e de permissão de leitura para o usuário @tracefinancedev
+1. Dar permissão de leitura para o usuário do github @tracefinancedev no repositório do desafio.
+2. Enviar um e-mail para bsoares@trace.finance com o assunto: "Vaga Back-end Jr.". No corpo do e-mail, favor enviar a URL do repositório no Github.
