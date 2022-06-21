@@ -11,7 +11,7 @@ Antes do pagamento ser autorizado é necessário validar se a carteira que está
 ## Regras
 
 - Uma carteira deve possuir o nome do dono da mesma e o valor desse atributo não pode ser vazio ou nulo
-- O valor máximo para um saque é de 1000 reais
+- O valor máximo para um pagamento é de 1000 reais
 - Durante o periodo diurno, o limite total é de 4000 reais
 - Durante o periodo noturno, o limite total é de 1000 reais
 - Durante o final de semana, o limite total é de 1000 reais
