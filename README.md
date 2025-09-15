@@ -81,27 +81,32 @@ POST /wallets
 
 ---
 
-### Consultar limite disponível
+### Consultar políticas da carteira
 ```
-GET /wallets/{walletId}/limits?at=2025-09-15T13:37:00-03:00
+GET /wallets/{walletId}/policies
 ```
-
-- `at` é opcional. Se ausente, considerar o horário atual em `America/Sao_Paulo`.
 
 **200 OK**
 ```json
 {
-  "period": "DAYTIME|NIGHTTIME|WEEKEND",
-  "policyId": "string|null",
-  "policyCategory": "VALUE_LIMIT|TX_COUNT_LIMIT"
-  // Campos adicionais variam conforme a categoria da política ativa
+  "data": [
+    {
+      "id": "uuid",
+      "name": "DEFAULT_VALUE_LIMIT",
+      "category": "VALUE_LIMIT",
+      "maxPerPayment": 1000,
+      "daytimeDailyLimit": 4000,
+      "nighttimeDailyLimit": 1000,
+      "weekendDailyLimit": 1000,
+      "createdAt": "2025-09-01T12:00:00-03:00",
+      "updatedAt": "2025-09-01T12:00:00-03:00"
+    }
+  ],
+  "meta": {
+    "total": 1
+  }
 }
 ```
-
-> **Importante**: A estrutura da resposta **varia conforme a categoria da política ativa**:
-> - **`VALUE_LIMIT`**: inclui campos como `maxPerPayment`, `totalLimitForPeriod`, `consumedInPeriod`, `availableInPeriod`
-> - **`TX_COUNT_LIMIT`**: inclui campos como `maxTransactionsPerDay`, `transactionsUsedToday`, `transactionsAvailableToday`
-> - Outras categorias futuras podem ter campos específicos próprios
 
 ---
 
