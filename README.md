@@ -119,9 +119,7 @@ Body:
 Regras:
 - O valor deve ser maior que zero e no máximo R$ 1.000,00.  
 - O campo `occurredAt` deve ser informado em formato **ISO-8601** e será usado para determinar o período (diurno, noturno, final de semana).  
-- O sistema deve estar preparado para **não processar o mesmo pagamento mais de uma vez**, mesmo que a requisição seja repetida (por exemplo, devido a falhas de rede ou envios duplicados pelo cliente).  
-- Se uma tentativa repetida corresponder exatamente ao mesmo pagamento já processado, a resposta deve ser igual à anterior, sem criar um novo registro.  
-- Se uma tentativa repetida contiver informações diferentes, a operação deve ser rejeitada.  
+- O sistema deve estar preparado para **não processar o mesmo pagamento mais de uma vez**, mesmo que a requisição seja repetida (por exemplo, devido a falhas de rede ou envios duplicados pelo cliente).   
 - Quando duas ou mais requisições acontecerem quase ao mesmo tempo para a mesma carteira, o consumo de limite não pode ultrapassar o valor permitido.  
 - Caso julgue necessário, você pode incluir **campos adicionais no corpo ou cabeçalhos da requisição** para permitir a identificação única de tentativas de pagamento.  
 
