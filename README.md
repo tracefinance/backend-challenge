@@ -93,15 +93,15 @@ GET /wallets/{walletId}/limits?at=2025-09-15T13:37:00-03:00
 {
   "period": "DAYTIME|NIGHTTIME|WEEKEND",
   "policyId": "string|null",
-  "policyCategory": "VALUE_LIMIT|TX_COUNT_LIMIT",
-  "maxPerPayment": 1000,
-  "totalLimitForPeriod": 4000,
-  "consumedInPeriod": 2500,
-  "availableInPeriod": 1500
+  "policyCategory": "VALUE_LIMIT|TX_COUNT_LIMIT"
+  // Campos adicionais variam conforme a categoria da política ativa
 }
 ```
 
-> Observação: quando a política ativa for `TX_COUNT_LIMIT`, os campos de valor podem não se aplicar; você pode retornar apenas informações relevantes à categoria ativa e/ou complementar com campos específicos da categoria.
+> **Importante**: A estrutura da resposta **varia conforme a categoria da política ativa**:
+> - **`VALUE_LIMIT`**: inclui campos como `maxPerPayment`, `totalLimitForPeriod`, `consumedInPeriod`, `availableInPeriod`
+> - **`TX_COUNT_LIMIT`**: inclui campos como `maxTransactionsPerDay`, `transactionsUsedToday`, `transactionsAvailableToday`
+> - Outras categorias futuras podem ter campos específicos próprios
 
 ---
 
@@ -118,7 +118,7 @@ Body:
 
 Regras:
 - O valor deve ser maior que zero e no máximo R$ 1.000,00.  
-- O campo `occurredAt` deve ser informado em formato **ISO-8601** e será usado para determinar o período (diurno, noturno, final de semana).  
+- O campo `occurredAt` deve ser informado em formato **ISO-8601**.  
 - O sistema deve estar preparado para **não processar o mesmo pagamento mais de uma vez**, mesmo que a requisição seja repetida (por exemplo, devido a falhas de rede ou envios duplicados pelo cliente).   
 - Quando duas ou mais requisições acontecerem quase ao mesmo tempo para a mesma carteira, o consumo de limite não pode ultrapassar o valor permitido.  
 - Caso julgue necessário, você pode incluir **campos adicionais no corpo ou cabeçalhos da requisição** para permitir a identificação única de tentativas de pagamento.  
@@ -130,11 +130,6 @@ Regras:
   "status": "APPROVED",
   "amount": 999.99,
   "occurredAt": "2025-09-15T17:59:59-03:00",
-  "period": "DAYTIME",
-  "consumedInPeriod": 999.99,
-  "availableInPeriod": 3000.01,
-  "policyId": "string|null",
-  "policyCategory": "VALUE_LIMIT"
 }
 ```
 
@@ -164,7 +159,6 @@ GET /wallets/{walletId}/payments?startDate=2025-09-01T00:00:00-03:00&endDate=202
       "amount": 250.00,
       "occurredAt": "2025-09-05T10:30:00-03:00",
       "status": "APPROVED",
-      "period": "DAYTIME",
       "createdAt": "2025-09-05T10:30:05-03:00",
       "updatedAt": "2025-09-05T10:30:05-03:00"
     },
@@ -174,7 +168,6 @@ GET /wallets/{walletId}/payments?startDate=2025-09-01T00:00:00-03:00&endDate=202
       "amount": 500.00,
       "occurredAt": "2025-09-10T20:45:00-03:00",
       "status": "APPROVED",
-      "period": "NIGHTTIME",
       "createdAt": "2025-09-10T20:45:10-03:00",
       "updatedAt": "2025-09-10T20:45:10-03:00"
     }
@@ -276,8 +269,8 @@ PUT /wallets/{walletId}/policy
   - **Persistência**: criação e consulta de carteiras, pagamentos e políticas.
   - **Filtros e paginação**: listagem de pagamentos com filtros de data e cursor.
   - **Reset diário**: verificação de limite zerado em novos períodos.
-  - **Políticas aplicadas**: diferentes políticas funcionando na mesma base de código.
-  - **APIs end-to-end**: todos os endpoints com casos de sucesso e erro.
+  - **Políticas dinâmicas**: diferentes categorias de política aplicadas na mesma base de código com estruturas de resposta específicas.
+  - **APIs end-to-end**: todos os endpoints retornando estruturas corretas conforme a política ativa.
   
 - Instruções claras para rodar a aplicação e dependências.  
 - Uso de banco de dados com script ou migração para criar coleções/índices.  
