@@ -44,8 +44,7 @@ Você deve construir uma API de pagamentos para carteiras virtuais (**wallets**)
   - **Diurno (06:00–18:00)**: até **R$ 4.000,00** por dia.  
   - **Noturno (18:00–06:00)**: até **R$ 1.000,00** por noite.  
   - **Final de semana** (sábado/domingo, 00:00–24:00): até **R$ 1.000,00** por dia.  
-- O limite é **diário por período**. Uma carteira pode chegar a R$ 5.000,00 no mesmo dia útil (4k no período diurno + 1k no noturno).  
-- O período deve ser calculado usando o fuso `America/Sao_Paulo`.  
+- O limite é **diário por período**. Uma carteira pode chegar a R$ 5.000,00 no mesmo dia útil (4k no período diurno + 1k no noturno).
 - As bordas devem ser respeitadas:
   - `>= 06:00:00` e `< 18:00:00` → diurno  
   - `>= 18:00:00` e `< 06:00:00` (do dia seguinte) → noturno  
@@ -75,7 +74,7 @@ POST /wallets
 {
   "id": "uuid",
   "ownerName": "string",
-  "createdAt": "ISO-8601"
+  "createdAt": "date"
 }
 ```
 
@@ -98,8 +97,8 @@ GET /wallets/{walletId}/policies
       "daytimeDailyLimit": 4000,
       "nighttimeDailyLimit": 1000,
       "weekendDailyLimit": 1000,
-      "createdAt": "2025-09-01T12:00:00-03:00",
-      "updatedAt": "2025-09-01T12:00:00-03:00"
+      "createdAt": "date",
+      "updatedAt": "date"
     }
   ],
   "meta": {
@@ -117,13 +116,12 @@ POST /wallets/{walletId}/payments
 Body:
 {
   "amount": 999.99,
-  "occurredAt": "2025-09-15T17:59:59-03:00"
+  "occurredAt": "date"
 }
 ```
 
 Regras:
-- O valor deve ser maior que zero e no máximo R$ 1.000,00.  
-- O campo `occurredAt` deve ser informado em formato **ISO-8601**.  
+- O valor deve ser maior que zero e no máximo R$ 1.000,00.    
 - O sistema deve estar preparado para **não processar o mesmo pagamento mais de uma vez**, mesmo que a requisição seja repetida (por exemplo, devido a falhas de rede ou envios duplicados pelo cliente).   
 - Quando duas ou mais requisições acontecerem quase ao mesmo tempo para a mesma carteira, o consumo de limite não pode ultrapassar o valor permitido.  
 - Caso julgue necessário, você pode incluir **campos adicionais no corpo ou cabeçalhos da requisição** para permitir a identificação única de tentativas de pagamento.  
@@ -134,7 +132,7 @@ Regras:
   "paymentId": "uuid",
   "status": "APPROVED",
   "amount": 999.99,
-  "occurredAt": "2025-09-15T17:59:59-03:00",
+  "occurredAt": "date",
 }
 ```
 
@@ -146,7 +144,7 @@ Regras:
 
 ### Listar pagamentos (com filtro por data)
 ```
-GET /wallets/{walletId}/payments?startDate=2025-09-01T00:00:00-03:00&endDate=2025-09-15T23:59:59-03:00&cursor=abc123
+GET /wallets/{walletId}/payments?startDate=date&endDate=date&cursor=abc123
 ```
 
 - `startDate` e `endDate` são opcionais. Se ausentes, retornar todos os pagamentos da carteira.  
@@ -162,19 +160,19 @@ GET /wallets/{walletId}/payments?startDate=2025-09-01T00:00:00-03:00&endDate=202
       "id": "uuid",
       "walletId": "uuid",
       "amount": 250.00,
-      "occurredAt": "2025-09-05T10:30:00-03:00",
+      "occurredAt": "date",
       "status": "APPROVED",
-      "createdAt": "2025-09-05T10:30:05-03:00",
-      "updatedAt": "2025-09-05T10:30:05-03:00"
+      "createdAt": "date",
+      "updatedAt": "date"
     },
     {
       "id": "uuid",
       "walletId": "uuid",
       "amount": 500.00,
-      "occurredAt": "2025-09-10T20:45:00-03:00",
+      "occurredAt": "date",
       "status": "APPROVED",
-      "createdAt": "2025-09-10T20:45:10-03:00",
-      "updatedAt": "2025-09-10T20:45:10-03:00"
+      "createdAt": "date",
+      "updatedAt": "date"
     }
   ],
   "meta": {
@@ -224,8 +222,8 @@ GET /policies
       "daytimeDailyLimit": 4000,
       "nighttimeDailyLimit": 1000,
       "weekendDailyLimit": 1000,
-      "createdAt": "2025-09-01T12:00:00-03:00",
-      "updatedAt": "2025-09-01T12:00:00-03:00"
+      "createdAt": "date",
+      "updatedAt": "date"
     },
     {
       "id": "uuid",
@@ -235,8 +233,8 @@ GET /policies
       "daytimeDailyLimit": 4000,
       "nighttimeDailyLimit": 2000,
       "weekendDailyLimit": 1000,
-      "createdAt": "2025-09-05T15:00:00-03:00",
-      "updatedAt": "2025-09-05T15:00:00-03:00"
+      "createdAt": "date",
+      "updatedAt": "date"
     }
   ],
   "meta": {
