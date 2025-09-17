@@ -74,7 +74,7 @@ POST /wallets
 {
   "id": "uuid",
   "ownerName": "string",
-  "createdAt": "date"
+  "createdAt": "2024-08-25T22:31:44.4758Z"
 }
 ```
 
@@ -97,8 +97,8 @@ GET /wallets/{walletId}/policies
       "daytimeDailyLimit": 4000,
       "nighttimeDailyLimit": 1000,
       "weekendDailyLimit": 1000,
-      "createdAt": "date",
-      "updatedAt": "date"
+      "createdAt": "2024-08-20T10:00:00.0000Z",
+      "updatedAt": "2024-08-26T12:34:56.7890Z"
     }
   ],
   "meta": {
@@ -116,7 +116,7 @@ POST /wallets/{walletId}/payments
 Body:
 {
   "amount": 999.99,
-  "occurredAt": "date"
+  "occurredAt": "2024-08-26T09:42:17.2500Z"
 }
 ```
 
@@ -132,7 +132,7 @@ Regras:
   "paymentId": "uuid",
   "status": "APPROVED",
   "amount": 999.99,
-  "occurredAt": "date",
+  "occurredAt": "2024-08-26T09:42:17.2500Z"
 }
 ```
 
@@ -144,11 +144,10 @@ Regras:
 
 ### Listar pagamentos (com filtro por data)
 ```
-GET /wallets/{walletId}/payments?startDate=date&endDate=date&cursor=abc123
+GET /wallets/{walletId}/payments?startDate=2024-08-25T00:00:00.0000Z&endDate=2024-08-26T23:59:59.9999Z&cursor=abc123
 ```
 
 - `startDate` e `endDate` são opcionais. Se ausentes, retornar todos os pagamentos da carteira.  
-- Os parâmetros devem estar em formato **ISO-8601**.  
 - A listagem deve retornar no formato padrão utilizado em nossas APIs, com `data` e `meta`.  
 - A paginação deve ser feita por cursor (`nextCursor`, `previousCursor`).  
 
@@ -160,19 +159,19 @@ GET /wallets/{walletId}/payments?startDate=date&endDate=date&cursor=abc123
       "id": "uuid",
       "walletId": "uuid",
       "amount": 250.00,
-      "occurredAt": "date",
+      "occurredAt": "2024-08-25T14:22:08.1234Z",
       "status": "APPROVED",
-      "createdAt": "date",
-      "updatedAt": "date"
+      "createdAt": "2024-08-25T14:22:08.2234Z",
+      "updatedAt": "2024-08-25T14:22:08.2234Z"
     },
     {
       "id": "uuid",
       "walletId": "uuid",
       "amount": 500.00,
-      "occurredAt": "date",
+      "occurredAt": "2024-08-25T17:59:59.9999Z",
       "status": "APPROVED",
-      "createdAt": "date",
-      "updatedAt": "date"
+      "createdAt": "2024-08-25T18:00:00.0500Z",
+      "updatedAt": "2024-08-25T18:00:00.0500Z"
     }
   ],
   "meta": {
@@ -222,8 +221,8 @@ GET /policies
       "daytimeDailyLimit": 4000,
       "nighttimeDailyLimit": 1000,
       "weekendDailyLimit": 1000,
-      "createdAt": "date",
-      "updatedAt": "date"
+      "createdAt": "2024-08-18T08:30:00.0000Z",
+      "updatedAt": "2024-08-25T22:31:44.4758Z"
     },
     {
       "id": "uuid",
@@ -233,8 +232,8 @@ GET /policies
       "daytimeDailyLimit": 4000,
       "nighttimeDailyLimit": 2000,
       "weekendDailyLimit": 1000,
-      "createdAt": "date",
-      "updatedAt": "date"
+      "createdAt": "2024-08-19T09:00:00.0000Z",
+      "updatedAt": "2024-08-26T11:15:30.3333Z"
     }
   ],
   "meta": {
@@ -307,4 +306,4 @@ PUT /wallets/{walletId}/policy
 
 1. Dê permissão de leitura para `@tracefinancedev` no repositório.  
 2. Envie e-mail para `backend@trace.finance` com assunto **Vaga Back-end Pleno** e a URL do repo.  
-3. No README, explique suas principais decisões de arquitetura e pontos de atenção.  
+3. No README, explique suas principais decisões de arquitetura e pontos de atenção.
