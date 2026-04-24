@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────
+# Trace Security · Web Security Check
+# ─────────────────────────────────────────────────────────────
+# Copie este arquivo para o seu repo em:
+#   .github/workflows/security.yml
+#
+# Ele chama o workflow centralizado do time de AppSec.
+# Não altere este arquivo — atualizações são automáticas.
+# ─────────────────────────────────────────────────────────────
+
+name: Security Scan
+
+"on":
+  pull_request:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  security:
+    uses: tracefinance/DevSecOps/.github/workflows/web-security.yml@main
+    # Para customizar, descomente:
+    # with:
+    #   logo_url: "https://url-do-logo.png"
+    #   semgrep_config: "p/default"  # ou "p/owasp-top-ten", "p/java", etc.
